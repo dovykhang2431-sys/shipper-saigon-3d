@@ -165,13 +165,13 @@
       vb.add(0.14, 0.62, 0.14, 0, 0.72, -0.62, 0x166534);
       vb.add(0.14, 0.52, 0.14, 0, 0.66, 0.18, 0x166534);
       vb.add(0.32, 0.12, 0.38, 0, 0.94, 0.18, 0x451a03); // Yên da nâu
-      vb.add(1.30, 0.08, 0.10, 0, 1.08, -0.58, 0xe2e8f0); // Ghi-đông rộng để nhìn rõ từ camera sau
+      vb.add(1.30, 0.12, 0.12, 0, 1.08, -0.58, 0x1e293b); // Ghi-đông rộng để nhìn rõ từ camera sau
       vb.add(0.48, 0.34, 0.34, 0, 0.92, -0.84, 0x94a3b8); // Giỏ sắt
       vb.add(0.38, 0.24, 0.24, 0, 0.96, -0.84, 0x64748b);
       vb.add(0.88, 0.10, 0.90, 0, 0.76, 0.64, 0x475569); // Baga thép sau
       vb.add(0.16, 0.12, 0.08, 0, 0.72, 1.08, 0xef4444);
       const wF = makeVoxelWheel(0.68, 0.10); wF.position.set(0, 0.34, -0.78);
-      const wR = makeVoxelWheel(0.68, 0.10); wR.position.set(0, 0.34, 0.74);
+      const wR = makeVoxelWheel(0.68, 0.28); wR.position.set(0, 0.34, 0.74);
       wheels.push(wF, wR); g.add(wF, wR);
     } else if (vehId === 1) {
       // Honda Wave Xanh
@@ -179,7 +179,7 @@
       vb.add(0.74, 0.64, 0.38, 0, 0.78, -0.62, 0x1e293b);
       vb.add(0.62, 0.20, 0.74, 0, 0.80, 0.08, 0x1e293b); // Yên xe
       vb.add(0.16, 0.16, 0.92, 0.38, 0.36, 0.44, 0xcbd5e1); // Ống pô inox
-      vb.add(1.30, 0.10, 0.14, 0, 1.14, -0.58, 0x1e293b); // Ghi-đông rộng để nhìn rõ từ camera sau
+      vb.add(1.30, 0.14, 0.14, 0, 1.14, -0.58, 0x1e293b); // Ghi-đông rộng để nhìn rõ từ camera sau
       vb.add(0.14, 0.12, 0.08, -0.60, 1.28, -0.56, 0x0f172a); // Gương trái
       vb.add(0.14, 0.12, 0.08, 0.60, 1.28, -0.56, 0x0f172a); // Gương phải
       vb.add(0.94, 0.10, 0.94, 0, 0.80, 0.66, 0x94a3b8); // Baga sắt sau
@@ -187,14 +187,14 @@
       addGlow(g, 0.34, 0.18, 0.12, 0, 1.06, -0.80, 0xfef08a);
       addGlow(g, 0.36, 0.14, 0.08, 0, 0.72, 0.96, 0xef4444);
       const wF = makeVoxelWheel(0.64, 0.18); wF.position.set(0, 0.32, -0.78);
-      const wR = makeVoxelWheel(0.64, 0.20); wR.position.set(0, 0.32, 0.74);
+      const wR = makeVoxelWheel(0.64, 0.30); wR.position.set(0, 0.32, 0.74);
       wheels.push(wF, wR); g.add(wF, wR);
     } else if (vehId === 2) {
       // Honda Vision Đỏ
       vb.add(0.70, 0.48, 1.84, 0, 0.54, 0, 0xdc2626);
       vb.add(0.76, 0.70, 0.44, 0, 0.80, -0.60, 0xdc2626);
       vb.add(0.56, 0.16, 0.70, 0, 0.80, 0.06, 0x1e293b);
-      vb.add(1.30, 0.10, 0.14, 0, 1.16, -0.56, 0xdc2626); // Ghi-đông rộng để nhìn rõ từ camera sau
+      vb.add(1.30, 0.14, 0.14, 0, 1.16, -0.56, 0xdc2626); // Ghi-đông rộng để nhìn rõ từ camera sau
       vb.add(0.14, 0.12, 0.08, -0.60, 1.30, -0.54, 0x0f172a);
       vb.add(0.14, 0.12, 0.08, 0.60, 1.30, -0.54, 0x0f172a);
       vb.add(0.86, 0.10, 0.86, 0, 0.80, 0.66, 0x475569);
@@ -202,7 +202,7 @@
       addGlow(g, 0.34, 0.20, 0.12, 0, 1.08, -0.80, 0xfef08a);
       addGlow(g, 0.36, 0.16, 0.08, 0, 0.74, 0.94, 0xef4444);
       const wF = makeVoxelWheel(0.62, 0.18); wF.position.set(0, 0.31, -0.74);
-      const wR = makeVoxelWheel(0.62, 0.20); wR.position.set(0, 0.31, 0.72);
+      const wR = makeVoxelWheel(0.62, 0.30); wR.position.set(0, 0.31, 0.72);
       wheels.push(wF, wR); g.add(wF, wR);
     } else if (vehId === 3) {
       // Xe Ba Gác Máy Xanh
