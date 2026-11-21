@@ -98,30 +98,16 @@
     while (vehSlot.children.length) vehSlot.remove(vehSlot.children[0]);
     while (charSlot.children.length) charSlot.remove(charSlot.children[0]);
 
-    const glbVeh = window.ModelLoader && window.ModelLoader.clone('veh_' + save.selectedVehicle);
-    if (glbVeh) {
-      vehSlot.add(glbVeh);
-      // The voxel .glb is a flat side-view relief: from the chase camera its
-      // frame and wheels are edge-on and almost invisible, so the rider looks
-      // like they are standing on the cargo box. Add the fallback's real 3D
-      // wheels (one wide wheel per axle) so the vehicle reads as a vehicle.
-      const builtVeh = VF.buildPlayerVehicle(save.selectedVehicle);
-      const axles = {};
-      activeWheels = [];
-      builtVeh.wheels.forEach(function (w) {
-        const key = w.position.z.toFixed(2);
-        if (axles[key]) return;
-        axles[key] = true;
-        w.position.x = 0;
-        w.scale.x = 2.2;
-        vehSlot.add(w);
-        activeWheels.push(w);
-      });
-    } else {
-      const builtVeh = VF.buildPlayerVehicle(save.selectedVehicle);
-      vehSlot.add(builtVeh.group);
-      activeWheels = builtVeh.wheels;
-    }
+    // Player vehicle: always the built-in 3D voxel model, NOT the .glb relief.
+    // The .glb vehicles are flat side-view reliefs: from the chase camera
+    // (behind the player) their frame and wheels are edge-on and invisible,
+    // so the rider looks like they are standing on the cargo box. The
+    // fallback model is a real 3D build (wide handlebar, rack, 3D wheels)
+    // designed for this camera. The .glb models still show up as traffic,
+    // houses and characters. (2026-11-21, after two live playtests.)
+    const builtVeh = VF.buildPlayerVehicle(save.selectedVehicle);
+    vehSlot.add(builtVeh.group);
+    activeWheels = builtVeh.wheels;
 
     if (save.selectedVehicle !== 4) {
       const zOff = save.selectedVehicle === 3 ? -0.32 : -0.14;
