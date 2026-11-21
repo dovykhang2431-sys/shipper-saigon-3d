@@ -488,7 +488,7 @@
         const box = stackBoxes[i];
         const sway = -playerVX * (0.015 + stackCount * 0.0015) * (i + 1) +
           Math.sin(animClock * 6.5 + i * 0.55) * 0.014 * i;
-        box.position.set(sway, veh.rackY + i * 0.44, veh.rackZ);
+        box.position.set(sway, veh.rackY + i * 0.34, veh.rackZ);
         box.rotation.z = -sway * 0.34;
       }
 
@@ -564,7 +564,7 @@
       world.updateEnvironment(dt * 0.3, 18);
       bikeTiltGroup.position.y = Math.sin(animClock * 4) * 0.03;
       for (let i = 0; i < stackCount; i++) {
-        stackBoxes[i].position.set(0, veh.rackY + i * 0.44, veh.rackZ);
+        stackBoxes[i].position.set(0, veh.rackY + i * 0.34, veh.rackZ);
         stackBoxes[i].rotation.z = 0;
       }
     }
