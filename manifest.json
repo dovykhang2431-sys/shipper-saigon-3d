@@ -1,0 +1,9 @@
+{
+  "name": "Shipper Sài Gòn Voxel 3D",
+  "short_name": "Shipper Voxel",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f172a",
+  "theme_color": "#111827"
+}

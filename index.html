@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Shipper Sài Gòn Voxel 3D - GLB Ready</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#111827" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body>
+  <div id="game-wrap">
+    <div id="stage">
+      <!-- Top Minimalist HUD (Safe-area top-left 68px) -->
+      <div class="hud">
+        <div class="hud-row">
+          <div class="pill-group">
+            <div class="pill pill-score" title="Điểm thưởng">
+              <svg class="svg-ico" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#facc15" stroke="#b45309" stroke-width="2"/><text x="12" y="16" text-anchor="middle" font-size="11" font-weight="900" fill="#92400e">★</text></svg>
+              <span id="hud-score">0</span>
+            </div>
+            <div class="pill pill-dist">
+              <span id="hud-dist">0m</span>
+            </div>
+            <div class="pill pill-speed">
+              <span id="hud-speed">36 km/h</span>
+            </div>
+          </div>
+          <div class="hud-actions">
+            <button id="btn-horn" class="icon-btn" type="button" aria-label="Bấm còi xe">
+              <svg class="svg-ico svg-ico-lg" viewBox="0 0 24 24" fill="none" stroke="#fde047" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a3 3 0 0 1 0 6"/><path d="M10 8h4l5-4v14l-5-4h-4a3 3 0 0 1 0-6z"/></svg>
+            </button>
+            <button id="btn-mute" class="icon-btn" type="button" aria-label="Bật hoặc tắt âm thanh">
+              <svg id="ico-sound-on" class="svg-ico svg-ico-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              <svg id="ico-sound-off" class="svg-ico svg-ico-lg" style="display:none" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+            </button>
+            <button id="btn-pause" class="icon-btn" type="button" aria-label="Tạm dừng">
+              <svg class="svg-ico svg-ico-lg" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4.5" height="14" rx="1.5"/><rect x="13.5" y="5" width="4.5" height="14" rx="1.5"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="weight-row">
+          <div class="weight-label">
+            <svg class="svg-ico" viewBox="0 0 24 24" fill="none"><path d="M3 8.5L12 4L21 8.5V16.5L12 21L3 16.5V8.5Z" fill="#f59e0b" stroke="#92400e" stroke-width="1.8"/><path d="M3 8.5L12 13L21 8.5" stroke="#fef3c7" stroke-width="1.8"/></svg>
+            <span><strong id="hud-boxes">0</strong> thùng · <span id="hud-weight-state">Nhẹ tay</span></span>
+          </div>
+          <div class="weight-bar">
+            <div id="weight-fill" class="weight-fill"></div>
+          </div>
+          <div id="hud-mult" class="mult-badge">x1</div>
+        </div>
+
+        <div id="vip-banner" class="vip-banner hidden">
+          ⚡ ĐƠN HỎA TỐC (x3) · Giao trong <strong id="vip-timer">15s</strong>
+        </div>
+      </div>
+
+      <div id="feedback-layer"></div>
+      <div id="perf-badge" class="perf-badge">60 FPS · GLB Ready</div>
+      <div id="weather-badge" class="weather-badge">☀️ Sáng Sài Gòn</div>
+      <div id="touch-hint" class="touch-hint">← Vuốt trái / phải · Vào ô Vàng nhận hàng, ô Xanh giao hàng →</div>
+
+      <!-- Lobby Overlay -->
+      <div id="overlay-lobby" class="overlay">
+        <div class="card">
+          <div class="hero-banner">
+            <img src="assets/cover.jpg" alt="Shipper Sài Gòn Voxel 3D" />
+            <div class="hero-scrim"></div>
+            <div class="hero-title-wrap">
+              <div class="badge-tag">Voxel 3D · GLB Ready</div>
+              <h1>Shipper Sài Gòn Voxel</h1>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="stat-grid">
+              <div class="stat-box">
+                <div id="lobby-points" class="stat-val">0</div>
+                <div class="stat-lbl">Điểm mở khóa</div>
+              </div>
+              <div class="stat-box">
+                <div id="lobby-best-score" class="stat-val">0</div>
+                <div class="stat-lbl">Kỷ lục điểm</div>
+              </div>
+              <div class="stat-box">
+                <div id="lobby-best-dist" class="stat-val">0m</div>
+                <div class="stat-lbl">Xa nhất</div>
+              </div>
+            </div>
+
+            <div class="section-label">PHƯƠNG TIỆN (5) · <span id="selected-veh-name">Xe Đạp Thồ Thép</span></div>
+            <div id="vehicle-strip" class="card-strip"></div>
+
+            <div class="section-label">NHÂN VẬT (5) · <span id="selected-char-name">Tài Xế Tân Binh</span></div>
+            <div id="character-strip" class="card-strip"></div>
+
+            <button id="btn-play" class="btn-primary" type="button">CHẠY NGAY</button>
+            <div class="controls-note">Ôm nhiều hàng = nặng tay lái hơn &amp; thưởng giao đậm hơn · Vuốt ← → hoặc phím A / D</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pause Overlay -->
+      <div id="overlay-pause" class="overlay overlay-center hidden">
+        <div class="card card-padded">
+          <div class="badge-tag">Tạm dừng</div>
+          <h1 style="margin-top:8px">Nghỉ tay bên vỉa hè</h1>
+          <p>Dòng xe Sài Gòn vẫn đang chờ bạn tiếp tục lạng lách.</p>
+          <button id="btn-resume" class="btn-primary" type="button">TIẾP TỤC CHẠY</button>
+          <button id="btn-restart-pause" class="btn-secondary" type="button">Chạy lại từ đầu</button>
+          <button id="btn-lobby-pause" class="btn-secondary" type="button">Về Sảnh chọn xe &amp; nhân vật</button>
+        </div>
+      </div>
+
+      <!-- Game Over Overlay -->
+      <div id="overlay-gameover" class="overlay overlay-center hidden">
+        <div class="card card-padded">
+          <div class="badge-tag badge-danger">Dừng cuộc chơi!</div>
+          <h1 style="margin-top:8px">Va chạm giao thông</h1>
+          <p id="go-desc">Bạn đã chạy rất tốt giữa phố Sài Gòn đông đúc.</p>
+          <div class="stat-grid">
+            <div class="stat-box">
+              <div id="go-score" class="stat-val">0</div>
+              <div class="stat-lbl">Điểm lượt này</div>
+            </div>
+            <div class="stat-box">
+              <div id="go-dist" class="stat-val">0m</div>
+              <div class="stat-lbl">Quãng đường</div>
+            </div>
+            <div class="stat-box">
+              <div id="go-delivered" class="stat-val">0</div>
+              <div class="stat-lbl">Thùng đã giao</div>
+            </div>
+          </div>
+          <button id="btn-retry" class="btn-primary" type="button">CHẠY LẠI NGAY</button>
+          <button id="btn-lobby-go" class="btn-secondary" type="button">Về Sảnh mở khóa xe &amp; nhân vật</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modular Game Scripts (with GLTFLoader + ModelLoader) -->
+  <script src="js/config.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/voxels.js"></script>
+  <script src="js/modelLoader.js"></script>
+  <script src="js/scene.js"></script>
+  <script src="js/traffic.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
