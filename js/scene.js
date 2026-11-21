@@ -81,7 +81,7 @@
 
     const scene = new THREE.Scene();
     scene.background = skyTextures[0];
-    scene.fog = new THREE.Fog(0xfef3c7, 42, 118);
+    scene.fog = new THREE.Fog(0xfef3c7, 50, 150);
 
     const camera = new THREE.PerspectiveCamera(52, 9 / 16, 0.5, 140);
     const camBase = new THREE.Vector3(0, 5.0, 7.8);
@@ -89,13 +89,13 @@
     camera.lookAt(0, 1.5, -10);
 
     const renderer = new THREE.WebGLRenderer({
-      antialias: !isMobile,
+      antialias: true,
       powerPreference: 'high-performance',
-      precision: isMobile ? 'mediump' : 'highp',
+      precision: 'highp',
       stencil: false,
       depth: true
     });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.06;
     // Enable crisp MagicaVoxel-style directional sun shadows!
@@ -109,8 +109,8 @@
     const sunLight = new THREE.DirectionalLight(0xffe8b6, 1.15);
     sunLight.position.set(18, 26, 14);
     sunLight.castShadow = true;
-    sunLight.shadow.mapSize.width = isMobile ? 1024 : 1536;
-    sunLight.shadow.mapSize.height = isMobile ? 1024 : 1536;
+    sunLight.shadow.mapSize.width = 2048;
+    sunLight.shadow.mapSize.height = 2048;
     sunLight.shadow.camera.near = 4;
     sunLight.shadow.camera.far = 95;
     sunLight.shadow.camera.left = -22;
@@ -168,6 +168,20 @@
     skyVB.add(4.6, 14, 4.0, 13.5, 7, -114, 0x94a3b8);
     skyVB.add(4.0, 20, 4.0, -8.5, 10, -112, 0xb0c4de);
     skyVB.add(3.8, 12, 3.8, -14.5, 6, -114, 0x94a3b8);
+    // Lit windows on the towers so the skyline is not plain cream boxes
+    function addTowerWindows(cx, w, yBottom, yTop, zFront, cols, rows) {
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const wx = cx - w / 2 + (c + 0.5) * (w / cols);
+          const wy = yBottom + (r + 0.5) * ((yTop - yBottom) / rows);
+          skyVB.add(0.7, 0.9, 0.06, wx, wy, zFront + 0.03, 0x1e3a5f);
+        }
+      }
+    }
+    addTowerWindows(6.5, 5.0, 1, 17, -109.5, 3, 7);   // Landmark 81 base
+    addTowerWindows(-1.5, 4.2, 1, 15, -112, 3, 6);
+    addTowerWindows(13.5, 4.6, 1, 13, -112, 3, 5);
+    addTowerWindows(-8.5, 4.0, 1, 19, -110, 3, 7);
     const skylineMesh = skyVB.build(false, false);
     scene.add(skylineMesh);
 
