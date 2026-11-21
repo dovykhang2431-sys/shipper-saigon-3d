@@ -8,11 +8,11 @@
 
     // 5 Unlockable Voxel Vehicles (purely cosmetic/feel, zero stat upgrades)
     VEHICLES: [
-      { id: 0, name: 'Xe Đạp Thồ Thép', short: 'Xe Đạp', cost: 0, img: 'assets/veh_0.jpg', rackY: 0.92, rackZ: 0.62, widthHit: 0.85, horn: 'bell' },
-      { id: 1, name: 'Honda Wave Xanh', short: 'Wave', cost: 1500, img: 'assets/veh_1.jpg', rackY: 0.95, rackZ: 0.64, widthHit: 0.95, horn: 'wave' },
-      { id: 2, name: 'Honda Vision Đỏ', short: 'Vision', cost: 3500, img: 'assets/veh_2.jpg', rackY: 0.95, rackZ: 0.64, widthHit: 0.95, horn: 'scooter' },
-      { id: 3, name: 'Xe Ba Gác Máy Xanh', short: 'Ba Gác', cost: 7000, img: 'assets/veh_3.jpg', rackY: 0.98, rackZ: 0.74, widthHit: 1.15, horn: 'bagac' },
-      { id: 4, name: 'Xe Tải Mini Carry', short: 'Tải Mini', cost: 12000, img: 'assets/veh_4.jpg', rackY: 1.04, rackZ: 0.82, widthHit: 1.2, horn: 'truck' }
+      { id: 0, name: 'Xe Đạp Thồ Thép', short: 'Xe Đạp', cost: 0, img: 'assets/veh_0.jpg', rackY: 0.92, rackZ: 0.88, widthHit: 0.85, horn: 'bell' },
+      { id: 1, name: 'Honda Wave Xanh', short: 'Wave', cost: 1500, img: 'assets/veh_1.jpg', rackY: 0.95, rackZ: 0.90, widthHit: 0.95, horn: 'wave' },
+      { id: 2, name: 'Honda Vision Đỏ', short: 'Vision', cost: 3500, img: 'assets/veh_2.jpg', rackY: 0.95, rackZ: 0.90, widthHit: 0.95, horn: 'scooter' },
+      { id: 3, name: 'Xe Ba Gác Máy Xanh', short: 'Ba Gác', cost: 7000, img: 'assets/veh_3.jpg', rackY: 0.98, rackZ: 1.00, widthHit: 1.15, horn: 'bagac' },
+      { id: 4, name: 'Xe Tải Mini Carry', short: 'Tải Mini', cost: 12000, img: 'assets/veh_4.jpg', rackY: 1.04, rackZ: 1.08, widthHit: 1.2, horn: 'truck' }
     ],
 
     // 5 Unlockable Voxel Characters (mix & match freely with any vehicle)
