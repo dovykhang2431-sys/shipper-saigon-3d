@@ -103,7 +103,7 @@
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     stageEl.insertBefore(renderer.domElement, stageEl.firstChild);
 
-    const hemiLight = new THREE.HemisphereLight(0xfffbeb, 0x64748b, 0.72);
+    const hemiLight = new THREE.HemisphereLight(0xfffbeb, 0x64748b, 0.95);
     scene.add(hemiLight);
 
     const sunLight = new THREE.DirectionalLight(0xffe8b6, 1.15);
