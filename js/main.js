@@ -101,7 +101,22 @@
     const glbVeh = window.ModelLoader && window.ModelLoader.clone('veh_' + save.selectedVehicle);
     if (glbVeh) {
       vehSlot.add(glbVeh);
+      // The voxel .glb is a flat side-view relief: from the chase camera its
+      // frame and wheels are edge-on and almost invisible, so the rider looks
+      // like they are standing on the cargo box. Add the fallback's real 3D
+      // wheels (one wide wheel per axle) so the vehicle reads as a vehicle.
+      const builtVeh = VF.buildPlayerVehicle(save.selectedVehicle);
+      const axles = {};
       activeWheels = [];
+      builtVeh.wheels.forEach(function (w) {
+        const key = w.position.z.toFixed(2);
+        if (axles[key]) return;
+        axles[key] = true;
+        w.position.x = 0;
+        w.scale.x = 2.2;
+        vehSlot.add(w);
+        activeWheels.push(w);
+      });
     } else {
       const builtVeh = VF.buildPlayerVehicle(save.selectedVehicle);
       vehSlot.add(builtVeh.group);
