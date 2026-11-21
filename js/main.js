@@ -98,13 +98,16 @@
     while (vehSlot.children.length) vehSlot.remove(vehSlot.children[0]);
     while (charSlot.children.length) charSlot.remove(charSlot.children[0]);
 
-    // Player vehicle: always the built-in 3D voxel model, NOT the .glb relief.
-    // The .glb vehicles are flat side-view reliefs: from the chase camera
-    // (behind the player) their frame and wheels are edge-on and invisible,
-    // so the rider looks like they are standing on the cargo box. The
-    // fallback model is a real 3D build (wide handlebar, rack, 3D wheels)
-    // designed for this camera. The .glb models still show up as traffic,
-    // houses and characters. (2026-11-21, after two live playtests.)
+    // Player vehicle + rider: always the built-in 3D voxel models, NOT the
+    // .glb reliefs. The .glb vehicles are flat side-view reliefs (frame and
+    // wheels edge-on and invisible from the chase camera), and the .glb
+    // characters are flat front-view reliefs — from behind you see the
+    // rider's mirrored FRONT, standing straight and holding a parcel, which
+    // reads as standing on the cargo box. The fallback models are true 3D:
+    // the rider sits with hands on the handlebar, back to the camera, and
+    // the bike has a wide handlebar, rack and real 3D wheels. The .glb
+    // models still show up as traffic, houses and (via the menu art) the
+    // character/vehicle portraits. (2026-11-21, after three live playtests.)
     const builtVeh = VF.buildPlayerVehicle(save.selectedVehicle);
     vehSlot.add(builtVeh.group);
     activeWheels = builtVeh.wheels;
@@ -112,13 +115,7 @@
     if (save.selectedVehicle !== 4) {
       const zOff = save.selectedVehicle === 3 ? -0.32 : -0.14;
       const yOff = save.selectedVehicle === 3 ? 1.2 : 1.15;
-      const glbChar = window.ModelLoader && window.ModelLoader.clone('char_' + save.selectedChar);
-      if (glbChar) {
-        glbChar.position.set(0, yOff - 0.55, zOff);
-        charSlot.add(glbChar);
-      } else {
-        charSlot.add(VF.buildVoxelCharacter(getChar(), yOff, zOff));
-      }
+      charSlot.add(VF.buildVoxelCharacter(getChar(), yOff, zOff));
     }
   }
 
